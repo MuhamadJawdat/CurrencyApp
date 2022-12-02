@@ -7,13 +7,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class HomePage: UIViewController {
+    
+    let viewModel = HomePageViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        viewModel.fetchAvailableCurrencies() {
+            print(self.viewModel.availableCurrencies)
+        }
     }
-
-
 }
 
