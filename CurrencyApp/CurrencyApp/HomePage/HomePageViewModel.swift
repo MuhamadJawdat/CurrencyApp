@@ -10,14 +10,25 @@ import RxSwift
 
 class HomePageViewModel {
     
-    var availableCurrencies = [String:String]()
+    var availableCurrencies = PublishSubject<[String:String]>()
     
-    func fetchAvailableCurrencies(onCompletion:@escaping ()->()) {
+    func fetchAvailableCurrencies() {
+        
+        guard CacheManager.availableCuurencies.isEmpty else {
+            self.updateAvailableCurrencies(data: CacheManager.availableCuurencies)
+            return
+        }
+        
         let urlString = "https://api.apilayer.com/fixer/symbols"
         NetworkFetcher.fetchFixerData(apiURL: urlString) { (availableCurrencies: AvailableCurrencies) in
-            self.availableCurrencies = availableCurrencies.currencies ?? [:]
-            onCompletion()
+            self.updateAvailableCurrencies(data: availableCurrencies.currencies)
         }
+    }
+    
+    private func updateAvailableCurrencies(data: [String:String]?) {
+        guard let data = data else {return}
+        self.availableCurrencies.onNext(data)
+        self.availableCurrencies.onCompleted()
     }
 }
 

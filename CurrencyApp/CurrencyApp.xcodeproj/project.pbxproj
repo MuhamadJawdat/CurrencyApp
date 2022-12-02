@@ -14,9 +14,11 @@
 		42EFEDA9293A147800D582D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42EFEDA8293A147800D582D8 /* Assets.xcassets */; };
 		42EFEDAC293A147800D582D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42EFEDAA293A147800D582D8 /* LaunchScreen.storyboard */; };
 		42EFEDB5293A168600D582D8 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFEDB4293A168600D582D8 /* HomePageViewModel.swift */; };
-		42EFEDB8293A18A600D582D8 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 42EFEDB7293A18A600D582D8 /* RxSwift */; };
 		42EFEDBB293A1F3A00D582D8 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFEDBA293A1F3A00D582D8 /* NetworkMonitor.swift */; };
 		42EFEDBD293A2D4A00D582D8 /* NetworkFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFEDBC293A2D4A00D582D8 /* NetworkFetcher.swift */; };
+		42EFEDC0293A65AD00D582D8 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 42EFEDBF293A65AD00D582D8 /* RxCocoa */; };
+		42EFEDC2293A65AD00D582D8 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 42EFEDC1293A65AD00D582D8 /* RxSwift */; };
+		42EFEDC6293A743E00D582D8 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFEDC5293A743E00D582D8 /* CacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,7 @@
 		42EFEDB4293A168600D582D8 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		42EFEDBA293A1F3A00D582D8 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		42EFEDBC293A2D4A00D582D8 /* NetworkFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFetcher.swift; sourceTree = "<group>"; };
+		42EFEDC5293A743E00D582D8 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42EFEDB8293A18A600D582D8 /* RxSwift in Frameworks */,
+				42EFEDC2293A65AD00D582D8 /* RxSwift in Frameworks */,
+				42EFEDC0293A65AD00D582D8 /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +94,7 @@
 			children = (
 				42EFEDBA293A1F3A00D582D8 /* NetworkMonitor.swift */,
 				42EFEDBC293A2D4A00D582D8 /* NetworkFetcher.swift */,
+				42EFEDC5293A743E00D582D8 /* CacheManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -111,7 +116,8 @@
 			);
 			name = CurrencyApp;
 			packageProductDependencies = (
-				42EFEDB7293A18A600D582D8 /* RxSwift */,
+				42EFEDBF293A65AD00D582D8 /* RxCocoa */,
+				42EFEDC1293A65AD00D582D8 /* RxSwift */,
 			);
 			productName = CurrencyApp;
 			productReference = 42EFED9C293A147700D582D8 /* CurrencyApp.app */;
@@ -142,7 +148,7 @@
 			);
 			mainGroup = 42EFED93293A147700D582D8;
 			packageReferences = (
-				42EFEDB6293A18A600D582D8 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				42EFEDBE293A65AD00D582D8 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 42EFED9D293A147700D582D8 /* Products */;
 			projectDirPath = "";
@@ -177,6 +183,7 @@
 				42EFEDA0293A147700D582D8 /* AppDelegate.swift in Sources */,
 				42EFEDBD293A2D4A00D582D8 /* NetworkFetcher.swift in Sources */,
 				42EFEDA2293A147700D582D8 /* SceneDelegate.swift in Sources */,
+				42EFEDC6293A743E00D582D8 /* CacheManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,9 +345,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.akoum.CurrencyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -366,9 +376,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.akoum.CurrencyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -396,7 +409,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		42EFEDB6293A18A600D582D8 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+		42EFEDBE293A65AD00D582D8 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
 			requirement = {
@@ -407,9 +420,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		42EFEDB7293A18A600D582D8 /* RxSwift */ = {
+		42EFEDBF293A65AD00D582D8 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 42EFEDB6293A18A600D582D8 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = 42EFEDBE293A65AD00D582D8 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		42EFEDC1293A65AD00D582D8 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42EFEDBE293A65AD00D582D8 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
