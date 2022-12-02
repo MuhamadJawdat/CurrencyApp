@@ -49,13 +49,13 @@ class HomePageViewController: UIViewController {
 extension HomePageViewController {
     private func setupPickerViews() {
         //setup data
-        viewModel.availableCurrencies.bind(to: fromPickerView.rx.itemTitles) { (row, element) in
-            return element.key
+        viewModel.availableCurrencies.bind(to: fromPickerView.rx.itemTitles) { (_, currency) in
+            currency
         }
         .disposed(by: disposeBag)
         
-        viewModel.availableCurrencies.bind(to: toPickerView.rx.itemTitles) { (row, element) in
-            return element.key
+        viewModel.availableCurrencies.bind(to: toPickerView.rx.itemTitles) { (_, currency) in
+            currency
         }
         .disposed(by: disposeBag)
         

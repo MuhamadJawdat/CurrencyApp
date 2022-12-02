@@ -10,7 +10,7 @@ import RxSwift
 
 class HomePageViewModel {
     
-    var availableCurrencies = PublishSubject<[String:String]>()
+    var availableCurrencies = PublishSubject<[String]>()
     
     func fetchAvailableCurrencies() {
         
@@ -29,7 +29,7 @@ class HomePageViewModel {
     
     private func updateAvailableCurrencies(data: [String:String]?) {
         guard let data = data else {return}
-        self.availableCurrencies.onNext(data)
+        self.availableCurrencies.onNext(data.keys.sorted(by: {$0 < $1}))
         self.availableCurrencies.onCompleted()
     }
 }
