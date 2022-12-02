@@ -16,13 +16,14 @@ class NetworkFetcher {
         }
         var request = URLRequest(url: resourceURL)
         request.httpMethod = "GET"
-        request.addValue("K11RbCa1n6x4f3ULWYlB7ogomlUOVoPQ", forHTTPHeaderField: "apikey")
+        request.addValue("5Yf4f34kUSmv7u4OtY5CB10wzW4frQ3h", forHTTPHeaderField: "apikey")
         
         let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = self.extractData(data: data, error: error) else {
                 return
             }
             if let jsonData = try? JSONDecoder().decode(T.self, from: data) {
+                print("Data retreived from backend")
                 onCompletion(jsonData)
             } else {
                 print("problem parsing response.\nResponse:\n\(String(decoding: data, as: UTF8.self))")

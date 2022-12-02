@@ -21,7 +21,9 @@ class HomePageViewModel {
         
         let urlString = "https://api.apilayer.com/fixer/symbols"
         NetworkFetcher.fetchFixerData(apiURL: urlString) { (availableCurrencies: AvailableCurrencies) in
-            self.updateAvailableCurrencies(data: availableCurrencies.currencies)
+            guard let currencies = availableCurrencies.currencies else {return}
+            self.updateAvailableCurrencies(data: currencies)
+            CacheManager.availableCuurencies = currencies
         }
     }
     
@@ -29,13 +31,5 @@ class HomePageViewModel {
         guard let data = data else {return}
         self.availableCurrencies.onNext(data)
         self.availableCurrencies.onCompleted()
-    }
-}
-
-struct AvailableCurrencies: Codable {
-    var currencies: [String: String]?
-    
-    enum CodingKeys: String, CodingKey {
-        case currencies = "symbols"
     }
 }
