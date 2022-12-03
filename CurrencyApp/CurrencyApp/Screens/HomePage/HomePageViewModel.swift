@@ -129,7 +129,12 @@ class HomePageViewModel {
             print("Rate retrievable error")
             return
         }
-        updateConvertedAmount(data: (baseAmount * rate).roundToDecimal(4))
+        let convertedAmountResult = (baseAmount * rate).roundToDecimal(4)
+        updateConvertedAmount(data: convertedAmountResult)
+        addConversionToHistory(baseCurrency: baseCurrency,
+                               baseAmount: baseAmount,
+                               targetCurrency: targetConversionCurrency,
+                               targetAmount: convertedAmountResult)
     }
     
     func convertValue(baseCurrency: String, targetConversionCurrency: String, convertedAmount: Double) {
@@ -137,7 +142,12 @@ class HomePageViewModel {
             print("Rate retrievable error")
             return
         }
-        updateBaseAmount(data: (convertedAmount / rate).roundToDecimal(4))
+        let baseAmountResult = (convertedAmount / rate).roundToDecimal(4)
+        updateBaseAmount(data: baseAmountResult)
+        addConversionToHistory(baseCurrency: baseCurrency,
+                               baseAmount: baseAmountResult,
+                               targetCurrency: targetConversionCurrency,
+                               targetAmount: convertedAmount)
     }
     
     private func updateAvailableCurrencies(data: [String:String]?) {
@@ -168,5 +178,21 @@ class HomePageViewModel {
     func updateTargetConversionCurrency(data: String?) {
         guard let data = data else {return}
         targetConversionCurrency.onNext(data)
+    }
+    
+    func addConversionToHistory(baseCurrency: String? , baseAmount: Double?, targetCurrency: String?, targetAmount: Double?) {
+        guard let baseCurrency,
+                let baseAmount,
+                let targetCurrency,
+                let targetAmount else {return}
+        let conversion = Conversion(baseCurrency: baseCurrency,
+                                    targetCurrency: targetCurrency,
+                                    baseAmount: baseAmount,
+                                    targetAmount: targetAmount)
+        var conversionHistory = CacheManager.conversionHistory
+        if conversionHistory?.dayZeroConversions.first(where: {$0 == conversion}) == nil {
+            conversionHistory?.dayZeroConversions.append(conversion)
+        }
+        CacheManager.conversionHistory = conversionHistory
     }
 }

@@ -39,4 +39,24 @@ class CacheManager {
             }
         }
     }
+    
+    static var conversionHistory: ConversionHistory? {
+        get {
+            if let storedRates = userDefaults.object(forKey: "conversionHistory") as? Data {
+                let decoder = JSONDecoder()
+                if let data = try? decoder.decode(ConversionHistory.self, from: storedRates) {
+                    return data
+                } else {
+                    return nil
+                }
+            }
+            return nil
+        }
+        set {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(newValue) {
+                userDefaults.set(encoded, forKey: "conversionHistory")
+            }
+        }
+    }
 }

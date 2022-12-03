@@ -7,16 +7,27 @@
 
 import Foundation
 
-struct ConversionHistory {
+struct ConversionHistory: Codable {
     var dayZeroDate: Date
     var dayZeroConversions: [Conversion]
     var dayMinusOneConversions: [Conversion]
     var dayMinusTwoConversions: [Conversion]
+    
+    var allHistory: [Conversion] {
+        dayZeroConversions + dayMinusOneConversions + dayMinusTwoConversions
+    }
+    
+    init() {
+        dayZeroDate = Date()
+        dayZeroConversions = []
+        dayMinusOneConversions = []
+        dayMinusTwoConversions = []
+    }
 }
 
-struct Conversion {
-    let baseCurrencyKey: String
-    let targetCurrencyKey: String
-    let baseCurrencyValue: Double
-    let targetCurrencyValue: Double
+struct Conversion: Codable, Equatable {
+    let baseCurrency: String
+    let targetCurrency: String
+    let baseAmount: Double
+    let targetAmount: Double
 }
