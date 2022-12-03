@@ -45,7 +45,9 @@ class HomePageViewController: UIViewController {
     }
     
     @IBAction func SwitchFromToTapped(_ sender: Any) {
-        print("==> tapped")
+        viewModel.flipConversionSides(baseCurrency: viewModel.availableCurrenciesSortedKeys[self.fromPickerView.selectedRow(inComponent: 0)],
+                                      targetCurrency: viewModel.availableCurrenciesSortedKeys[self.toPickerView.selectedRow(inComponent: 0)],
+                                      convertedAmount: Double(toTextField.text ?? ""), baseAmount: Double(fromTextField.text ?? ""))
     }
     
 }
@@ -118,7 +120,6 @@ extension HomePageViewController {
                 guard let self = self,
                       let query = query,
                 let doubleValue = Double(query) else {return}
-                //self.viewModel.updateConvertedAmount(data: Double(query))
                 self.viewModel.convertValue(baseCurrency: self.viewModel.availableCurrenciesSortedKeys[self.fromPickerView.selectedRow(inComponent: 0)],
                                             targetConversionCurrency: self.viewModel.availableCurrenciesSortedKeys[self.toPickerView.selectedRow(inComponent: 0)],
                                             convertedAmount: doubleValue)

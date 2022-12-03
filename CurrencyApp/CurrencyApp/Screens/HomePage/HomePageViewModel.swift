@@ -29,6 +29,19 @@ class HomePageViewModel {
     
     let disposeBag = DisposeBag()
     
+    func flipConversionSides(baseCurrency: String, targetCurrency: String, convertedAmount: Double?, baseAmount: Double?) {
+        updateBaseCurrency(data: targetCurrency)
+        updateTargetConversionCurrency(data: baseCurrency)
+        if let convertedAmount = convertedAmount {
+            updateBaseAmount(data: convertedAmount)
+        } else if let baseAmount = baseAmount {
+            updateConvertedAmount(data: baseAmount)
+            convertValue(baseCurrency: targetCurrency,
+                                        targetConversionCurrency: baseCurrency,
+                                        convertedAmount: baseAmount)
+        }
+    }
+    
     func setupViewModel() {
         initializeConversionSubscription()
         
@@ -39,7 +52,7 @@ class HomePageViewModel {
     
     func initializeConversionSubscription() {
         let conversionInput = Observable.combineLatest(baseCurrency, targetConversionCurrency, baseAmount)
-        let conversionInputSubscription = conversionInput.subscribe(onNext: { [weak self] (baseCurrency,targetConversionCurrency,baseAmount) in
+        _ = conversionInput.subscribe(onNext: { [weak self] (baseCurrency,targetConversionCurrency,baseAmount) in
             guard let self = self else {return}
             guard (CacheManager.storedRates.first {$0.baseCurrency == baseCurrency}) != nil else {
                 self.currencyRates.subscribe(onNext: { _ in
@@ -155,15 +168,5 @@ class HomePageViewModel {
     func updateTargetConversionCurrency(data: String?) {
         guard let data = data else {return}
         targetConversionCurrency.onNext(data)
-    }
-}
-
-struct CurrencyRate: Codable {
-    let baseCurrency: String?
-    var rates: [String:Double]?
-    
-    enum CodingKeys: String, CodingKey {
-        case baseCurrency = "base"
-        case rates
     }
 }
