@@ -13,6 +13,8 @@ class DetailsViewModel {
     var recentConversions = PublishSubject<[Conversion]>()
     var otherConversions = PublishSubject<[Conversion]>()
     
+    let otherCurrenciesLimit = 10
+    
     func setupData() {
         recentConversions.onNext(CacheManager.conversionHistory.allHistory)
         recentConversions.onCompleted()
@@ -24,6 +26,7 @@ class DetailsViewModel {
               let baseAmount else {return}
         var conversions = [Conversion]()
         CacheManager.storedRates.forEach {
+            guard conversions.count < otherCurrenciesLimit else {return}
             guard let targetCurrency = $0.baseCurrency,
                   targetCurrency != baseCurrency,
                   targetCurrency != previousTargetCurrency,

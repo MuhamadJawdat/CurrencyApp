@@ -103,7 +103,6 @@ extension HomePageViewController {
         //setup TextFields
         fromTextField.rx
             .controlEvent(.editingDidEnd)
-            .throttle(.milliseconds(250), scheduler: MainScheduler.instance)
             .withLatestFrom(fromTextField.rx.text)
             .subscribe(onNext: { query in
                 guard let query = query else {return}
@@ -112,7 +111,6 @@ extension HomePageViewController {
         
         toTextField.rx
             .controlEvent(.editingDidEnd)
-            .throttle(.milliseconds(250), scheduler: MainScheduler.instance)
             .withLatestFrom(toTextField.rx.text)
             .subscribe(onNext: { [weak self] query in
                 guard let self,
