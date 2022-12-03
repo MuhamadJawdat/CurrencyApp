@@ -24,6 +24,7 @@ class NetworkFetcher {
             }
             if let jsonData = try? JSONDecoder().decode(T.self, from: data) {
                 print("Data retreived from backend")
+                print("response:\n*** *** ***\n\(String(decoding: data, as: UTF8.self))\n*** *** ***")
                 onCompletion(jsonData)
             } else {
                 print("problem parsing response.\nResponse:\n\(String(decoding: data, as: UTF8.self))")
