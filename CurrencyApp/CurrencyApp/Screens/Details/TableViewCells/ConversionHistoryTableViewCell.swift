@@ -18,9 +18,9 @@ class ConversionHistoryTableViewCell: UITableViewCell {
     func updateCell(with conversion: Conversion) {
         //base
         baseCurrencyLabel.text = conversion.baseCurrency
-        baseAmountLabel.text = "\(conversion.baseAmount)"
+        baseAmountLabel.text = "\(conversion.baseAmount.roundToDecimal(4))"
         //target
         targetCurrencyLabel.text = conversion.targetCurrency
-        targetAmountLabel.text = "\(conversion.targetAmount)"
+        targetAmountLabel.text = "\(conversion.targetAmount.roundToDecimal(4))"
     }
 }

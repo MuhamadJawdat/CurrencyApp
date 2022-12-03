@@ -14,7 +14,7 @@ class DetailsViewModel {
     var otherConversions = PublishSubject<[Conversion]>()
     
     func setupData() {
-        recentConversions.onNext(CacheManager.conversionHistory?.allHistory ?? [])
+        recentConversions.onNext(CacheManager.conversionHistory.allHistory)
         recentConversions.onCompleted()
     }
     
@@ -35,5 +35,4 @@ class DetailsViewModel {
         }
         otherConversions.onNext(conversions)
     }
-    
 }

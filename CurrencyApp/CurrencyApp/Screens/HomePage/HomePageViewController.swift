@@ -35,7 +35,6 @@ class HomePageViewController: UIViewController {
         setupUI()
         
         viewModel.setupViewModel()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,38 +66,37 @@ extension HomePageViewController {
         
         //setup onSelection
         fromPickerView.rx.modelSelected(String.self)
-            .bind { currency in
+            .bind { [weak self] currency in
                 //do conversion
-                self.viewModel.updateBaseCurrency(data: currency.first)
+                self?.viewModel.updateBaseCurrency(data: currency.first)
             }
             .disposed(by: disposeBag)
         
-        viewModel.baseCurrency.subscribe(onNext: { currency in
-            guard let indexOfCurrency = self.viewModel.availableCurrenciesSortedKeys.firstIndex(of: currency) else {return}
+        viewModel.baseCurrency.subscribe(onNext: { [weak self] currency in
+            guard let indexOfCurrency = self?.viewModel.availableCurrenciesSortedKeys.firstIndex(of: currency) else {return}
             DispatchQueue.main.async {
-                self.fromPickerView.selectRow(indexOfCurrency, inComponent: 0, animated: true)
+                self?.fromPickerView.selectRow(indexOfCurrency, inComponent: 0, animated: true)
             }
         })
         .disposed(by: disposeBag)
-        
         
         toPickerView.rx.modelSelected(String.self)
-            .bind { currency in
-                self.viewModel.updateTargetConversionCurrency(data: currency.first)
+            .bind { [weak self] currency in
+                self?.viewModel.updateTargetConversionCurrency(data: currency.first)
             }
             .disposed(by: disposeBag)
         
-        viewModel.targetConversionCurrency.subscribe(onNext: { currency in
-            guard let indexOfCurrency = self.viewModel.availableCurrenciesSortedKeys.firstIndex(of: currency) else {return}
+        viewModel.targetConversionCurrency.subscribe(onNext: { [weak self] currency in
+            guard let indexOfCurrency = self?.viewModel.availableCurrenciesSortedKeys.firstIndex(of: currency) else {return}
             DispatchQueue.main.async {
-                self.toPickerView.selectRow(indexOfCurrency, inComponent: 0, animated: true)
+                self?.toPickerView.selectRow(indexOfCurrency, inComponent: 0, animated: true)
             }
         })
         .disposed(by: disposeBag)
         
-        viewModel.availableCurrencies.bind { availableCurrencies in
+        viewModel.availableCurrencies.bind { [weak self] availableCurrencies in
             guard let firstCurrency = availableCurrencies.first else {return}
-            self.viewModel.fetchRatesForCurrency(currency:firstCurrency)
+            self?.viewModel.fetchRatesForCurrency(currency:firstCurrency)
         }
         .disposed(by: disposeBag)
         
@@ -117,24 +115,24 @@ extension HomePageViewController {
             .throttle(.milliseconds(250), scheduler: MainScheduler.instance)
             .withLatestFrom(toTextField.rx.text)
             .subscribe(onNext: { [weak self] query in
-                guard let self = self,
-                      let query = query,
-                let doubleValue = Double(query) else {return}
+                guard let self,
+                      let query,
+                      let doubleValue = Double(query) else {return}
                 self.viewModel.convertValue(baseCurrency: self.viewModel.availableCurrenciesSortedKeys[self.fromPickerView.selectedRow(inComponent: 0)],
                                             targetConversionCurrency: self.viewModel.availableCurrenciesSortedKeys[self.toPickerView.selectedRow(inComponent: 0)],
                                             convertedAmount: doubleValue)
             }).disposed(by: disposeBag)
         
-        viewModel.convertedAmount.subscribe(onNext: { value in
+        viewModel.convertedAmount.subscribe(onNext: { [weak self] value in
             DispatchQueue.main.async {
-                self.toTextField.text = "\(value)"
+                self?.toTextField.text = "\(value)"
             }
         })
         .disposed(by: disposeBag)
         
-        viewModel.baseAmount.subscribe(onNext: { value in
+        viewModel.baseAmount.subscribe(onNext: { [weak self] value in
             DispatchQueue.main.async {
-                self.fromTextField.text = "\(value)"
+                self?.fromTextField.text = "\(value)"
             }
         })
         .disposed(by: disposeBag)

@@ -55,8 +55,8 @@ class HomePageViewModel {
         _ = conversionInput.subscribe(onNext: { [weak self] (baseCurrency,targetConversionCurrency,baseAmount) in
             guard let self = self else {return}
             guard (CacheManager.storedRates.first {$0.baseCurrency == baseCurrency}) != nil else {
-                self.currencyRates.subscribe(onNext: { _ in
-                    self.convertValue(baseCurrency: baseCurrency, targetConversionCurrency: targetConversionCurrency, baseAmount: baseAmount)
+                self.currencyRates.subscribe(onNext: { [weak self] _ in
+                    self?.convertValue(baseCurrency: baseCurrency, targetConversionCurrency: targetConversionCurrency, baseAmount: baseAmount)
                 })
                 .disposed(by: self.disposeBag)
                 self.fetchRatesForCurrency(currency:baseCurrency)
@@ -74,7 +74,7 @@ class HomePageViewModel {
         
         let urlString = "https://api.apilayer.com/fixer/symbols"
         NetworkFetcher.fetchFixerData(apiURL: urlString) { [weak self] (availableCurrencies: AvailableCurrencies) in
-            guard let self = self,
+            guard let self,
                   let currencies = availableCurrencies.currencies else {
                 print("No data available")
                 return
@@ -151,32 +151,32 @@ class HomePageViewModel {
     }
     
     private func updateAvailableCurrencies(data: [String:String]?) {
-        guard let data = data else {return}
+        guard let data else {return}
         availableCurrencies.onNext(data.keys.sorted(by: {$0 < $1}))
     }
     
     private func updateAvailableCurrencyRates(data: [CurrencyRate]?) {
-        guard let data = data else {return}
+        guard let data else {return}
         currencyRates.onNext(data)
     }
     
     func updateBaseAmount(data: Double?) {
-        guard let data = data else {return}
+        guard let data else {return}
         baseAmount.onNext(data)
     }
     
     func updateConvertedAmount(data: Double?) {
-        guard let data = data else {return}
+        guard let data else {return}
         convertedAmount.onNext(data)
     }
     
     func updateBaseCurrency(data: String?) {
-        guard let data = data else {return}
+        guard let data else {return}
         baseCurrency.onNext(data)
     }
     
     func updateTargetConversionCurrency(data: String?) {
-        guard let data = data else {return}
+        guard let data else {return}
         targetConversionCurrency.onNext(data)
     }
     
@@ -190,8 +190,9 @@ class HomePageViewModel {
                                     baseAmount: baseAmount,
                                     targetAmount: targetAmount)
         var conversionHistory = CacheManager.conversionHistory
-        if conversionHistory?.dayZeroConversions.first(where: {$0 == conversion}) == nil {
-            conversionHistory?.dayZeroConversions.append(conversion)
+        if conversionHistory.dayZeroConversions.first(where: {$0 == conversion}) == nil,
+            baseCurrency != targetCurrency {
+            conversionHistory.dayZeroConversions.append(conversion)
         }
         CacheManager.conversionHistory = conversionHistory
     }

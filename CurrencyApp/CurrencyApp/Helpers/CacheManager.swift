@@ -40,17 +40,17 @@ class CacheManager {
         }
     }
     
-    static var conversionHistory: ConversionHistory? {
+    static var conversionHistory: ConversionHistory {
         get {
             if let storedRates = userDefaults.object(forKey: "conversionHistory") as? Data {
                 let decoder = JSONDecoder()
                 if let data = try? decoder.decode(ConversionHistory.self, from: storedRates) {
                     return data
                 } else {
-                    return nil
+                    return ConversionHistory()
                 }
             }
-            return nil
+            return ConversionHistory()
         }
         set {
             let encoder = JSONEncoder()
