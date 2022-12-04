@@ -14,6 +14,7 @@ final class DetailsViewController: UIViewController {
 
     @IBOutlet private weak var recentConversionsTableView: UITableView!
     @IBOutlet private weak var otherCurrenciesTableView: UITableView!
+    @IBOutlet private weak var graphView: UIView!
     
     var viewModel = DetailsViewModel()
     let disposeBag = DisposeBag()
@@ -29,6 +30,13 @@ final class DetailsViewController: UIViewController {
     private func setupUI() {
         setupRecentConversionsTableView()
         setupOtherCurrenciesTableView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if let barChartView = viewModel.barChartView(size: graphView.frame.size) {
+            graphView.addSubview(barChartView)
+        }
     }
     
     private func setupRecentConversionsTableView() {

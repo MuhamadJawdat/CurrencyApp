@@ -5,7 +5,7 @@
 //  Created by Muhamad jawdat Akoum on 03/12/2022.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 
 final class DetailsViewModel {
@@ -73,5 +73,16 @@ final class DetailsViewModel {
         
         recentConversions.onNext(fetchedConversationsByDays)
         recentConversions.onCompleted()
+    }
+    
+    func barChartView(size: CGSize) -> UIView? {
+        let allBaseCurrencies = conversionHistory.map {$0.baseCurrency}
+        let allTargetCurrencies = conversionHistory.map {$0.targetCurrency}
+        let allUsedCurrencies = allBaseCurrencies + allTargetCurrencies
+        let countDictionary = allUsedCurrencies.reduce(into: [:]) { counts, element in
+            counts[element, default: 0] += 1
+        }
+        let bars = countDictionary.map {BarChartItem(title: $0.key, value: Double($0.value)) }
+        return Graphs.makeBarChart(bars: bars, size: size)
     }
 }

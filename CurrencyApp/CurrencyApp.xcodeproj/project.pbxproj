@@ -19,6 +19,8 @@
 		42E1DCA2293CCF7B00A89D4E /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 42E1DCA1293CCF7B00A89D4E /* RxCocoa */; };
 		42E1DCA4293CCF7B00A89D4E /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 42E1DCA3293CCF7B00A89D4E /* RxSwift */; };
 		42E1DCA7293CD0E100A89D4E /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 42E1DCA6293CD0E100A89D4E /* RxDataSources */; };
+		42E1DCAA293D060200A89D4E /* Graphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1DCA9293D060200A89D4E /* Graphs.swift */; };
+		42E1DCAE293D06AE00A89D4E /* GraphModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E1DCAD293D06AE00A89D4E /* GraphModels.swift */; };
 		42EFEDA0293A147700D582D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFED9F293A147700D582D8 /* AppDelegate.swift */; };
 		42EFEDA2293A147700D582D8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFEDA1293A147700D582D8 /* SceneDelegate.swift */; };
 		42EFEDA4293A147700D582D8 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EFEDA3293A147700D582D8 /* HomePageViewController.swift */; };
@@ -41,6 +43,8 @@
 		42CC6B44293B0838007F2DEB /* CurrencyRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRate.swift; sourceTree = "<group>"; };
 		42CC6B49293B7731007F2DEB /* ConversionHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		42E1DC9E293CC49F00A89D4E /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		42E1DCA9293D060200A89D4E /* Graphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphs.swift; sourceTree = "<group>"; };
+		42E1DCAD293D06AE00A89D4E /* GraphModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphModels.swift; sourceTree = "<group>"; };
 		42EFED9C293A147700D582D8 /* CurrencyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EFED9F293A147700D582D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42EFEDA1293A147700D582D8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +128,31 @@
 			path = TableViewCells;
 			sourceTree = "<group>";
 		};
+		42E1DCA8293D05DE00A89D4E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				42E1DCAB293D068C00A89D4E /* Graphs */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		42E1DCAB293D068C00A89D4E /* Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				42E1DCAC293D06A000A89D4E /* Models */,
+				42E1DCA9293D060200A89D4E /* Graphs.swift */,
+			);
+			path = Graphs;
+			sourceTree = "<group>";
+		};
+		42E1DCAC293D06A000A89D4E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				42E1DCAD293D06AE00A89D4E /* GraphModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		42EFED93293A147700D582D8 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +172,7 @@
 		42EFED9E293A147700D582D8 /* CurrencyApp */ = {
 			isa = PBXGroup;
 			children = (
+				42E1DCA8293D05DE00A89D4E /* Utilities */,
 				42CC6B3C293A8738007F2DEB /* Screens */,
 				42CC6B35293A8059007F2DEB /* Extensions */,
 				42EFEDB9293A1F2100D582D8 /* Helpers */,
@@ -263,6 +293,7 @@
 				42CC6B41293A8B28007F2DEB /* ConversionHistory.swift in Sources */,
 				42CC6B45293B0838007F2DEB /* CurrencyRate.swift in Sources */,
 				42EFEDBB293A1F3A00D582D8 /* NetworkMonitor.swift in Sources */,
+				42E1DCAA293D060200A89D4E /* Graphs.swift in Sources */,
 				42CC6B3A293A8677007F2DEB /* AvailableCurrencies.swift in Sources */,
 				42EFEDA0293A147700D582D8 /* AppDelegate.swift in Sources */,
 				42E1DC9F293CC49F00A89D4E /* Date+Extensions.swift in Sources */,
@@ -271,6 +302,7 @@
 				42CC6B37293A8066007F2DEB /* UIViewController+Extensions.swift in Sources */,
 				42EFEDC6293A743E00D582D8 /* CacheManager.swift in Sources */,
 				42CC6B4A293B7731007F2DEB /* ConversionHistoryTableViewCell.swift in Sources */,
+				42E1DCAE293D06AE00A89D4E /* GraphModels.swift in Sources */,
 				42CC6B3E293A8777007F2DEB /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

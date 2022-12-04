@@ -137,28 +137,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6xE-B3-YcU">
-                                <rect key="frame" x="16" y="119" width="361" height="150"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History Graph" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Llm-pV-57Q">
-                                        <rect key="frame" x="127.66666666666666" y="65" width="105.66666666666666" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6xE-B3-YcU" userLabel="graphView">
+                                <rect key="frame" x="16" y="147.33333333333334" width="361" height="150.00000000000003"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="Llm-pV-57Q" firstAttribute="centerX" secondItem="6xE-B3-YcU" secondAttribute="centerX" id="M65-lP-2eu"/>
                                     <constraint firstAttribute="height" constant="150" id="X3H-eM-2eg"/>
-                                    <constraint firstItem="Llm-pV-57Q" firstAttribute="centerY" secondItem="6xE-B3-YcU" secondAttribute="centerY" id="qA2-n1-wvW"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="1OH-YZ-aqA">
-                                <rect key="frame" x="16" y="285" width="361" height="517"/>
+                                <rect key="frame" x="16" y="313.33333333333326" width="361" height="488.66666666666674"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4D-vF-v0I" userLabel="Recent Conversations">
-                                        <rect key="frame" x="0.0" y="0.0" width="180.66666666666666" height="517"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="180.66666666666666" height="488.66666666666669"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent Conversions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5Kw-PG-xhp">
                                                 <rect key="frame" x="16" y="15.999999999999998" width="148.66666666666666" height="20.333333333333329"/>
@@ -167,7 +157,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Gul-WN-nhv" userLabel="RecentConversionsTableView">
-                                                <rect key="frame" x="0.0" y="52.333333333333286" width="180.66666666666666" height="464.66666666666674"/>
+                                                <rect key="frame" x="0.0" y="52.333333333333343" width="180.66666666666666" height="436.33333333333326"/>
                                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ConversionHistoryTableViewCell" rowHeight="60" id="xry-32-kFk" customClass="ConversionHistoryTableViewCell" customModule="CurrencyApp" customModuleProvider="target">
@@ -271,7 +261,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6s-0n-QE5" userLabel="Other Currencies">
-                                        <rect key="frame" x="180.66666666666663" y="0.0" width="180.33333333333337" height="517"/>
+                                        <rect key="frame" x="180.66666666666663" y="0.0" width="180.33333333333337" height="488.66666666666669"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other Currencies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kK9-Dp-w7E">
                                                 <rect key="frame" x="25.666666666666686" y="15.999999999999998" width="129" height="20.333333333333329"/>
@@ -280,7 +270,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xMu-As-TAr">
-                                                <rect key="frame" x="0.0" y="52.333333333333286" width="180.33333333333334" height="464.66666666666674"/>
+                                                <rect key="frame" x="0.0" y="52.333333333333343" width="180.33333333333334" height="436.33333333333326"/>
                                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OtherCurrencyTableViewCell" rowHeight="60" id="8Fg-RD-4Vv" customClass="ConversionHistoryTableViewCell" customModule="CurrencyApp" customModuleProvider="target">
@@ -384,21 +374,32 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Conversions Usage Per Currency" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="s4q-hg-cBQ">
+                                <rect key="frame" x="16" y="118.99999999999999" width="361" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8GY-aj-TFO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="8GY-aj-TFO" firstAttribute="trailing" secondItem="s4q-hg-cBQ" secondAttribute="trailing" constant="16" id="CJh-uI-4xD"/>
                             <constraint firstItem="8GY-aj-TFO" firstAttribute="bottom" secondItem="1OH-YZ-aqA" secondAttribute="bottom" constant="16" id="DxF-bs-C9J"/>
                             <constraint firstItem="1OH-YZ-aqA" firstAttribute="top" secondItem="6xE-B3-YcU" secondAttribute="bottom" constant="16" id="E7h-eI-efi"/>
                             <constraint firstItem="1OH-YZ-aqA" firstAttribute="leading" secondItem="8GY-aj-TFO" secondAttribute="leading" constant="16" id="IbI-cK-8rk"/>
+                            <constraint firstItem="s4q-hg-cBQ" firstAttribute="leading" secondItem="6xE-B3-YcU" secondAttribute="leading" id="Mce-xG-ZUj"/>
                             <constraint firstItem="8GY-aj-TFO" firstAttribute="trailing" secondItem="1OH-YZ-aqA" secondAttribute="trailing" constant="16" id="N2y-ML-Cdl"/>
-                            <constraint firstItem="6xE-B3-YcU" firstAttribute="top" secondItem="8GY-aj-TFO" secondAttribute="top" constant="16" id="YWa-9X-m1K"/>
+                            <constraint firstItem="s4q-hg-cBQ" firstAttribute="trailing" secondItem="6xE-B3-YcU" secondAttribute="trailing" id="Oip-bo-zIO"/>
                             <constraint firstItem="6xE-B3-YcU" firstAttribute="leading" secondItem="8GY-aj-TFO" secondAttribute="leading" constant="16" id="bCi-in-EtN"/>
+                            <constraint firstItem="6xE-B3-YcU" firstAttribute="top" secondItem="s4q-hg-cBQ" secondAttribute="bottom" constant="8" id="d5s-Ah-qCC"/>
                             <constraint firstItem="8GY-aj-TFO" firstAttribute="trailing" secondItem="6xE-B3-YcU" secondAttribute="trailing" constant="16" id="e0z-Gp-ZN3"/>
+                            <constraint firstItem="s4q-hg-cBQ" firstAttribute="top" secondItem="8GY-aj-TFO" secondAttribute="top" constant="16" id="nEd-0J-YA3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Js2-qC-Agb"/>
                     <connections>
+                        <outlet property="graphView" destination="6xE-B3-YcU" id="JE1-80-zkf"/>
                         <outlet property="otherCurrenciesTableView" destination="xMu-As-TAr" id="6S3-2B-xf2"/>
                         <outlet property="recentConversionsTableView" destination="Gul-WN-nhv" id="5ii-Ip-l63"/>
                     </connections>
