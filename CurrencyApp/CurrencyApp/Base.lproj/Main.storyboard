@@ -31,13 +31,13 @@
                                 <rect key="frame" x="16" y="195" width="361" height="214"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odA-dL-RpQ" userLabel="FromPickerView">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="214"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="125" height="214"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="AV0-3w-tQL"/>
+                                            <constraint firstAttribute="width" constant="125" id="AV0-3w-tQL"/>
                                         </constraints>
                                     </pickerView>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1.0" borderStyle="roundedRect" placeholder="Amount" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Qxc-WM-UQd" userLabel="FromTextField">
-                                        <rect key="frame" x="100" y="0.0" width="261" height="214"/>
+                                        <rect key="frame" x="125" y="0.0" width="236" height="214"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="43"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
@@ -60,16 +60,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Vm-Hl-ihw" userLabel="ToStackView">
-                                <rect key="frame" x="16" y="519" width="361" height="216"/>
+                                <rect key="frame" x="16" y="519" width="361" height="214"/>
                                 <subviews>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="usT-MG-bbJ" userLabel="ToPickerView">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="216"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="Dx1-11-92b"/>
-                                        </constraints>
+                                    <pickerView contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="usT-MG-bbJ" userLabel="ToPickerView">
+                                        <rect key="frame" x="0.0" y="0.0" width="125" height="214"/>
                                     </pickerView>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ddA-xF-0e2" userLabel="ToTextField">
-                                        <rect key="frame" x="100" y="0.0" width="261" height="216"/>
+                                        <rect key="frame" x="125" y="0.0" width="236" height="214"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="43"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
@@ -89,8 +86,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Vm-Hl-ihw" firstAttribute="height" secondItem="3ip-6Y-qFN" secondAttribute="height" multiplier="1.00935" id="1wt-9Z-NYd"/>
-                            <constraint firstItem="ddA-xF-0e2" firstAttribute="width" secondItem="Qxc-WM-UQd" secondAttribute="width" id="2Kv-vf-9hC"/>
+                            <constraint firstItem="6Vm-Hl-ihw" firstAttribute="height" secondItem="3ip-6Y-qFN" secondAttribute="height" id="1wt-9Z-NYd"/>
                             <constraint firstItem="8fV-9Z-U1Q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="46o-C0-nAh"/>
                             <constraint firstItem="0MQ-PO-eKp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="5nX-9Q-aF6"/>
                             <constraint firstItem="6O0-1J-kUs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="8q5-x6-GrC"/>
@@ -98,9 +94,10 @@
                             <constraint firstItem="3ip-6Y-qFN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Q0n-gs-s8w"/>
                             <constraint firstItem="3ip-6Y-qFN" firstAttribute="top" secondItem="8fV-9Z-U1Q" secondAttribute="bottom" constant="16" id="ULW-t8-Hb8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6O0-1J-kUs" secondAttribute="trailing" id="XmA-bo-Raa"/>
+                            <constraint firstItem="usT-MG-bbJ" firstAttribute="width" secondItem="odA-dL-RpQ" secondAttribute="width" id="YF4-4c-NKj"/>
                             <constraint firstItem="6Vm-Hl-ihw" firstAttribute="top" secondItem="tFM-y9-pbA" secondAttribute="bottom" constant="16" id="YlH-Dl-k0w"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6Vm-Hl-ihw" secondAttribute="bottom" constant="16" id="Z9T-w0-zeA"/>
-                            <constraint firstAttribute="trailing" secondItem="3ip-6Y-qFN" secondAttribute="trailing" constant="16" id="ba2-Sm-PKV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3ip-6Y-qFN" secondAttribute="trailing" constant="16" id="ba2-Sm-PKV"/>
                             <constraint firstItem="0MQ-PO-eKp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bid-2F-xmi"/>
                             <constraint firstItem="6O0-1J-kUs" firstAttribute="top" secondItem="3ip-6Y-qFN" secondAttribute="bottom" constant="16" id="eC8-iT-4vt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6Vm-Hl-ihw" secondAttribute="trailing" constant="16" id="hZ3-Uw-tj4"/>
