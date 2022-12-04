@@ -8,16 +8,23 @@
 import Foundation
 import RxSwift
 
-class DetailsViewModel {
+final class DetailsViewModel {
     
-    var recentConversions = PublishSubject<[Conversion]>()
-    var otherConversions = PublishSubject<[Conversion]>()
+    lazy var storedRates: [CurrencyRate] = {
+        CacheManager.storedRates
+    }()
+    
+    lazy var conversionHistory: [Conversion] = {
+        CacheManager.conversionHistory
+    }()
     
     let otherCurrenciesLimit = 10
     
+    var otherConversions = PublishSubject<[Conversion]>()
+    var recentConversions = PublishSubject<[ConversionHistoryDay]>()
+    
     func setupData() {
-        recentConversions.onNext(CacheManager.conversionHistory.allHistory)
-        recentConversions.onCompleted()
+        fetchRecentConversions()
     }
     
     func generateOtherCurrencyConversions(baseCurrency: String?, previousTargetCurrency: String?, baseAmount: Double?) {
@@ -25,7 +32,7 @@ class DetailsViewModel {
               let previousTargetCurrency,
               let baseAmount else {return}
         var conversions = [Conversion]()
-        CacheManager.storedRates.forEach {
+        storedRates.forEach {
             guard conversions.count < otherCurrenciesLimit else {return}
             guard let targetCurrency = $0.baseCurrency,
                   targetCurrency != baseCurrency,
@@ -37,5 +44,34 @@ class DetailsViewModel {
                                           targetAmount: (baseAmount / rate).roundToDecimal(4)))
         }
         otherConversions.onNext(conversions)
+    }
+    
+    func fetchRecentConversions() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.doesRelativeDateFormatting = true
+        var fetchedConversationsByDays = [ConversionHistoryDay]()
+        
+        conversionHistory.forEach { conversion in
+            // validating Day is available
+            guard let conversionDate = conversion.date else {return}
+            // Formatte Date to a day string
+            let dateAsDayString = dateFormatter.string(from: conversionDate)
+            // getting index of fetched Conversion of day matching day in the current conversion from conversion history
+            guard let index = fetchedConversationsByDays.firstIndex (where: { fetchedConversion in
+                fetchedConversion.day == dateAsDayString
+            }) else {
+                // otherwise there is no fetched conversion for the day of this conversion, so we create the first for this day, and add it at first, so that it always shows at the top in UI without the need to reverse it later
+                fetchedConversationsByDays.insert(ConversionHistoryDay(day: dateAsDayString,
+                                                                       conversions: [conversion]),
+                                                  at: 0)
+                return
+            }
+            // in case this day is already available, then we append the conversion in it
+            fetchedConversationsByDays[index].conversions.append(conversion)
+        }
+        
+        recentConversions.onNext(fetchedConversationsByDays)
+        recentConversions.onCompleted()
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class HomePageViewController: UIViewController {
+final class HomePageViewController: UIViewController {
     // Base Currency
     @IBOutlet private weak var fromPickerView: UIPickerView!
     @IBOutlet private weak var fromTextField: UITextField!

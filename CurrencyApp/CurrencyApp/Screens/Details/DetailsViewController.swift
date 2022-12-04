@@ -8,8 +8,9 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import RxDataSources
 
-class DetailsViewController: UIViewController {
+final class DetailsViewController: UIViewController {
 
     @IBOutlet private weak var recentConversionsTableView: UITableView!
     @IBOutlet private weak var otherCurrenciesTableView: UITableView!
@@ -26,10 +27,28 @@ class DetailsViewController: UIViewController {
     }
     
     private func setupUI() {
-        viewModel.recentConversions.bind(to: recentConversionsTableView.rx.items(cellIdentifier: "ConversionHistoryTableViewCell",
-                                                                                 cellType: ConversionHistoryTableViewCell.self)) { (row,item,cell) in
-            cell.updateCell(with: item)
-        }.disposed(by: disposeBag)
+        setupRecentConversionsTableView()
+        setupOtherCurrenciesTableView()
+    }
+    
+    private func setupRecentConversionsTableView() {
+        
+        // Create the data source for the table view.
+        let dataSource = RxTableViewSectionedReloadDataSource<ConversionHistoryDay>(
+            configureCell: { dataSource, tableView, indexPath, item in
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ConversionHistoryTableViewCell", for: indexPath) as? ConversionHistoryTableViewCell
+                cell?.updateCell(with: item)
+                return cell ?? UITableViewCell()
+            },
+            titleForHeaderInSection: { dataSource, index in
+                return dataSource[index].day
+            }
+        )
+        
+        // Bind the table view data source to the sections observable.
+        viewModel.recentConversions
+            .bind(to: recentConversionsTableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
         
         recentConversionsTableView.rx.modelSelected(Conversion.self).subscribe(onNext: { [weak self] conversion in
             self?.viewModel.generateOtherCurrencyConversions(baseCurrency: conversion.baseCurrency,
@@ -37,12 +56,13 @@ class DetailsViewController: UIViewController {
                                                              baseAmount: conversion.baseAmount)
         }).disposed(by: disposeBag)
         
-        
+    }
+    
+    private func setupOtherCurrenciesTableView() {
         viewModel.otherConversions.bind(to: otherCurrenciesTableView.rx.items(cellIdentifier: "OtherCurrencyTableViewCell",
-                                                                                 cellType: ConversionHistoryTableViewCell.self)) { (row,item,cell) in
+                                                                              cellType: ConversionHistoryTableViewCell.self)) { (row,item,cell) in
             cell.updateCell(with: item)
         }.disposed(by: disposeBag)
-        
     }
 }
 

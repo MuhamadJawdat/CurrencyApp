@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-class HomePageViewModel {
+final class HomePageViewModel {
     
     var availableCurrencies = PublishSubject<[String]>()
     var currencyRates = PublishSubject<[CurrencyRate]>()
@@ -181,18 +181,20 @@ class HomePageViewModel {
     }
     
     func addConversionToHistory(baseCurrency: String? , baseAmount: Double?, targetCurrency: String?, targetAmount: Double?) {
+        CacheManager.filterOldConversions()
         guard let baseCurrency,
                 let baseAmount,
                 let targetCurrency,
                 let targetAmount else {return}
-        let conversion = Conversion(baseCurrency: baseCurrency,
+        let conversion = Conversion(date: Date(),
+                                    baseCurrency: baseCurrency,
                                     targetCurrency: targetCurrency,
                                     baseAmount: baseAmount,
                                     targetAmount: targetAmount)
         var conversionHistory = CacheManager.conversionHistory
-        if conversionHistory.dayZeroConversions.first(where: {$0 == conversion}) == nil,
+        if conversionHistory.first(where: {$0 == conversion}) == nil,
             baseCurrency != targetCurrency {
-            conversionHistory.dayZeroConversions.append(conversion)
+            conversionHistory.append(conversion)
         }
         CacheManager.conversionHistory = conversionHistory
     }
