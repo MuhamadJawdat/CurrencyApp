@@ -76,10 +76,8 @@ final class DetailsViewModel {
     }
     
     func barChartView(size: CGSize) -> UIView? {
-        let allBaseCurrencies = conversionHistory.map {$0.baseCurrency}
         let allTargetCurrencies = conversionHistory.map {$0.targetCurrency}
-        let allUsedCurrencies = allBaseCurrencies + allTargetCurrencies
-        let countDictionary = allUsedCurrencies.reduce(into: [:]) { counts, element in
+        let countDictionary = allTargetCurrencies.reduce(into: [:]) { counts, element in
             counts[element, default: 0] += 1
         }
         let bars = countDictionary.map {BarChartItem(title: $0.key, value: Double($0.value)) }

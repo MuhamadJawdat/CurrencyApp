@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-final class HomePageViewModel {
+final class HomePageViewModel: FixerAPINetworkable {
     
     var availableCurrencies = PublishSubject<[String]>()
     var currencyRates = PublishSubject<[CurrencyRate]>()
@@ -48,6 +48,7 @@ final class HomePageViewModel {
         updateBaseCurrency(data: availableCurrenciesSortedKeys.first)
         updateTargetConversionCurrency(data: availableCurrenciesSortedKeys.first)
         updateBaseAmount(data: 1.0)
+        updateConvertedAmount(data: 1.0)
     }
     
     func initializeConversionSubscription() {
@@ -68,18 +69,11 @@ final class HomePageViewModel {
     
     func fetchAvailableCurrencies() {
         guard !isCurrenciesCacheAvailable else {
-            self.updateAvailableCurrencies(data: CacheManager.availableCurrencies)
+            updateAvailableCurrencies(data: CacheManager.availableCurrencies)
             return
         }
-        
-        let urlString = "https://api.apilayer.com/fixer/symbols"
-        NetworkFetcher.fetchFixerData(apiURL: urlString) { [weak self] (availableCurrencies: AvailableCurrencies) in
-            guard let self,
-                  let currencies = availableCurrencies.currencies else {
-                print("No data available")
-                return
-            }
-            self.updateAvailableCurrencies(data: currencies)
+        getAvailableCurrencies { [weak self] currencies in
+            self?.updateAvailableCurrencies(data: currencies)
             CacheManager.availableCurrencies = currencies
         }
     }
@@ -95,15 +89,12 @@ final class HomePageViewModel {
             return
         }
         
-        let urlString = "https://api.apilayer.com/fixer/latest?symbols=\(CacheManager.availableCurrencies.keys.sorted(by: {$0 < $1}).joined(separator: ","))&base=\(currency)"
-        NetworkFetcher.fetchFixerData(apiURL: urlString) { [weak self] (currencyRate: CurrencyRate) in
+        getCurrencyRates(GetCurrencyRatesRequest(baseCurrency: currency, targetCurrencies: Array(CacheManager.availableCurrencies.keys))) { [weak self] currencyRate in
             guard let self = self,
-                  let rates = currencyRate.rates,
-                  !rates.isEmpty else {
-                print("No data available")
+                  let rates = currencyRate.rates else {
                 return
             }
-            
+
             if isCurrencyRatesAvailable {
                 storedRates = storedRates.map {
                     if $0.baseCurrency == currency {
@@ -131,7 +122,7 @@ final class HomePageViewModel {
         }
         let convertedAmountResult = (baseAmount * rate).roundToDecimal(4)
         updateConvertedAmount(data: convertedAmountResult)
-        addConversionToHistory(baseCurrency: baseCurrency,
+        CacheManager.addConversionToHistory(baseCurrency: baseCurrency,
                                baseAmount: baseAmount,
                                targetCurrency: targetConversionCurrency,
                                targetAmount: convertedAmountResult)
@@ -144,7 +135,7 @@ final class HomePageViewModel {
         }
         let baseAmountResult = (convertedAmount / rate).roundToDecimal(4)
         updateBaseAmount(data: baseAmountResult)
-        addConversionToHistory(baseCurrency: baseCurrency,
+        CacheManager.addConversionToHistory(baseCurrency: baseCurrency,
                                baseAmount: baseAmountResult,
                                targetCurrency: targetConversionCurrency,
                                targetAmount: convertedAmount)
@@ -180,22 +171,22 @@ final class HomePageViewModel {
         targetConversionCurrency.onNext(data)
     }
     
-    func addConversionToHistory(baseCurrency: String? , baseAmount: Double?, targetCurrency: String?, targetAmount: Double?) {
-        CacheManager.filterOldConversions()
-        guard let baseCurrency,
-                let baseAmount,
-                let targetCurrency,
-                let targetAmount else {return}
-        let conversion = Conversion(date: Date(),
-                                    baseCurrency: baseCurrency,
-                                    targetCurrency: targetCurrency,
-                                    baseAmount: baseAmount,
-                                    targetAmount: targetAmount)
-        var conversionHistory = CacheManager.conversionHistory
-        if conversionHistory.first(where: {$0 == conversion}) == nil,
-            baseCurrency != targetCurrency {
-            conversionHistory.append(conversion)
-        }
-        CacheManager.conversionHistory = conversionHistory
-    }
+//    func addConversionToHistory(baseCurrency: String? , baseAmount: Double?, targetCurrency: String?, targetAmount: Double?) {
+//        CacheManager.filterOldConversions()
+//        guard let baseCurrency,
+//                let baseAmount,
+//                let targetCurrency,
+//                let targetAmount else {return}
+//        let conversion = Conversion(date: Date(),
+//                                    baseCurrency: baseCurrency,
+//                                    targetCurrency: targetCurrency,
+//                                    baseAmount: baseAmount,
+//                                    targetAmount: targetAmount)
+//        var conversionHistory = CacheManager.conversionHistory
+//        if conversionHistory.first(where: {$0 == conversion}) == nil,
+//            baseCurrency != targetCurrency {
+//            conversionHistory.append(conversion)
+//        }
+//        CacheManager.conversionHistory = conversionHistory
+//    }
 }

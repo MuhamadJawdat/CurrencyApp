@@ -71,4 +71,23 @@ class CacheManager {
             }
         }
     }
+    
+    static func addConversionToHistory(baseCurrency: String? , baseAmount: Double?, targetCurrency: String?, targetAmount: Double?) {
+        CacheManager.filterOldConversions()
+        guard let baseCurrency,
+              let baseAmount,
+              let targetCurrency,
+              let targetAmount else {return}
+        let conversion = Conversion(date: Date(),
+                                    baseCurrency: baseCurrency,
+                                    targetCurrency: targetCurrency,
+                                    baseAmount: baseAmount,
+                                    targetAmount: targetAmount)
+        var updatedConversionHistory = CacheManager.conversionHistory
+        if updatedConversionHistory.first(where: {$0 == conversion}) == nil,
+           baseCurrency != targetCurrency {
+            updatedConversionHistory.append(conversion)
+        }
+        conversionHistory = updatedConversionHistory
+    }
 }
