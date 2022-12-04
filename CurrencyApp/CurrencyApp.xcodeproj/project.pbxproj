@@ -130,12 +130,12 @@
 			path = TableViewCells;
 			sourceTree = "<group>";
 		};
-		42E1DCA8293D05DE00A89D4E /* Utilities */ = {
+		42E1DCA8293D05DE00A89D4E /* UI Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				42E1DCAB293D068C00A89D4E /* Graphs */,
 			);
-			path = Utilities;
+			path = "UI Utilities";
 			sourceTree = "<group>";
 		};
 		42E1DCAB293D068C00A89D4E /* Graphs */ = {
@@ -183,7 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				42E1DCB1293D084A00A89D4E /* Networking */,
-				42E1DCA8293D05DE00A89D4E /* Utilities */,
+				42E1DCA8293D05DE00A89D4E /* UI Utilities */,
 				42CC6B3C293A8738007F2DEB /* Screens */,
 				42CC6B35293A8059007F2DEB /* Extensions */,
 				42EFEDB9293A1F2100D582D8 /* Helpers */,

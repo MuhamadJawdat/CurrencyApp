@@ -134,18 +134,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6xE-B3-YcU" userLabel="graphView">
-                                <rect key="frame" x="16" y="147.33333333333334" width="361" height="150.00000000000003"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6xE-B3-YcU" userLabel="graphView" customClass="BarChartView" customModule="CurrencyApp" customModuleProvider="target">
+                                <rect key="frame" x="16" y="147.33333333333334" width="361" height="75"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="X3H-eM-2eg"/>
+                                    <constraint firstAttribute="height" constant="75" id="X3H-eM-2eg"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="1OH-YZ-aqA">
-                                <rect key="frame" x="16" y="313.33333333333326" width="361" height="488.66666666666674"/>
+                                <rect key="frame" x="16" y="238.33333333333331" width="361" height="563.66666666666674"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4D-vF-v0I" userLabel="Recent Conversations">
-                                        <rect key="frame" x="0.0" y="0.0" width="180.66666666666666" height="488.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="180.66666666666666" height="563.66666666666663"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent Conversions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5Kw-PG-xhp">
                                                 <rect key="frame" x="16" y="15.999999999999998" width="148.66666666666666" height="20.333333333333329"/>
@@ -154,7 +154,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Gul-WN-nhv" userLabel="RecentConversionsTableView">
-                                                <rect key="frame" x="0.0" y="52.333333333333343" width="180.66666666666666" height="436.33333333333326"/>
+                                                <rect key="frame" x="0.0" y="52.333333333333343" width="180.66666666666666" height="511.33333333333326"/>
                                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ConversionHistoryTableViewCell" rowHeight="60" id="xry-32-kFk" customClass="ConversionHistoryTableViewCell" customModule="CurrencyApp" customModuleProvider="target">
@@ -258,7 +258,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6s-0n-QE5" userLabel="Other Currencies">
-                                        <rect key="frame" x="180.66666666666663" y="0.0" width="180.33333333333337" height="488.66666666666669"/>
+                                        <rect key="frame" x="180.66666666666663" y="0.0" width="180.33333333333337" height="563.66666666666663"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other Currencies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kK9-Dp-w7E">
                                                 <rect key="frame" x="25.666666666666686" y="15.999999999999998" width="129" height="20.333333333333329"/>
@@ -267,7 +267,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xMu-As-TAr">
-                                                <rect key="frame" x="0.0" y="52.333333333333343" width="180.33333333333334" height="436.33333333333326"/>
+                                                <rect key="frame" x="0.0" y="52.333333333333343" width="180.33333333333334" height="511.33333333333326"/>
                                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OtherCurrencyTableViewCell" rowHeight="60" id="8Fg-RD-4Vv" customClass="ConversionHistoryTableViewCell" customModule="CurrencyApp" customModuleProvider="target">
